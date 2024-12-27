@@ -9,10 +9,30 @@ declare global {
 }
 
 const LANGUAGES = {
-  spanish: { label: "Español", videoId: "Io5mt83nCcU" },
-  english: { label: "English", videoId: "KuHOkF51X8Q" },
-  portuguese: { label: "Português", videoId: "9XT4CU-Ar2M" },
-  french: { label: "Français", videoId: "iEpJwprxDdk" },
+  spanish: {
+    label: "Español",
+    videoId: "Io5mt83nCcU",
+    icon: "co",
+    shortLabel: "ES",
+  },
+  english: {
+    label: "English",
+    videoId: "KuHOkF51X8Q",
+    icon: "us",
+    shortLabel: "EN",
+  },
+  portuguese: {
+    label: "Português",
+    videoId: "9XT4CU-Ar2M",
+    icon: "br",
+    shortLabel: "PR",
+  },
+  french: {
+    label: "Français",
+    videoId: "iEpJwprxDdk",
+    icon: "fr",
+    shortLabel: "FR",
+  },
 } as const;
 
 type Lang = keyof typeof LANGUAGES;
@@ -82,7 +102,7 @@ onMounted(() => {
     <div class="flex flex-wrap gap-2 justify-center mt-4">
       <button
         v-for="(obj, lang) of LANGUAGES"
-        class="px-6 py-2 rounded-full font-medium transition-colors"
+        class="px-6 py-2 rounded-full font-medium transition-colors flex items-center gap-2"
         :class="[
           currentLang === lang
             ? 'bg-blue-600 text-white'
@@ -90,7 +110,10 @@ onMounted(() => {
         ]"
         @click="changeLanguage(lang)"
       >
-        {{ obj.label }}
+        <img :src="`https://flagcdn.com/w20/${obj.icon}.jpg`" />
+
+        <span class="hidden md:block">{{ obj.label }}</span>
+        <span class="block md:hidden">{{ obj.shortLabel }}</span>
       </button>
     </div>
   </div>
